@@ -2,18 +2,26 @@ name: Portfolio CI/CD
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Run check
+      - name: Check Files
         run: |
-          echo "CI pipeline running..."
-          ls
-          echo "Success ✔"
+          echo "Checking project structure..."
+          ls -la
+
+      - name: Build Docker Image
+        run: |
+          docker build -t lohith-portfolio .
+
+      - name: Success Message
+        run: |
+          echo "Docker build successful!"
