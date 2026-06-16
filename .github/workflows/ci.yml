@@ -1,0 +1,21 @@
+name: System Health CI Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  test-script:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Bash environment
+      run: echo "Running system health script test"
+
+    - name: Run script test
+      run: |
+        chmod +x scripts/system-health.sh
+        bash scripts/system-health.sh
