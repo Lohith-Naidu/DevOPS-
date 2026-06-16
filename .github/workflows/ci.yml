@@ -2,18 +2,27 @@ name: System Health CI Pipeline
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
-  test-script:
+  system-health-check:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      # 1. Checkout repository (VERY IMPORTANT)
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Make script executable
-      run: chmod +x linux-scripts/scripts/system-health.sh
+      # 2. Show repo structure (debug step)
+      - name: List files
+        run: ls -R
 
-    - name: Run system health script
-      run: bash linux-scripts/scripts/system-health.sh
+      # 3. Make script executable
+      - name: Make script executable
+        run: chmod +x linux-scripts/scripts/system-health.sh
+
+      # 4. Run system health script
+      - name: Run system health script
+        run: bash linux-scripts/scripts/system-health.sh
