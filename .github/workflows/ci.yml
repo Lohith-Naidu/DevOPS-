@@ -12,10 +12,8 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Setup Bash environment
-      run: echo "Running system health script test"
+    - name: Make script executable
+      run: chmod +x linux-scripts/scripts/system-health.sh
 
-    - name: Run script test
-      run: |
-        chmod +x scripts/system-health.sh
-        bash scripts/system-health.sh
+    - name: Run system health script
+      run: bash linux-scripts/scripts/system-health.sh
