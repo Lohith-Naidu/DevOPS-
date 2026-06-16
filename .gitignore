@@ -1,1 +1,9 @@
-node_modules/
+# Logs (do not commit runtime logs)
+*.log
+linux-scripts/logs/
+
+# Metrics / runtime data
+*.json
+
+# OS files
+.DS_Store
