@@ -13,6 +13,9 @@ jobs:
       contents: read
       packages: write
 
+    env:
+      IMAGE_NAME: ghcr.io/lohith-naidu/devops-website:latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -26,8 +29,8 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t ghcr.io/${{ github.actor }}/devops-website:latest .
+          docker build -t $IMAGE_NAME .
 
       - name: Push image to GHCR
         run: |
-          docker push ghcr.io/${{ github.actor }}/devops-website:latest
+          docker push $IMAGE_NAME
