@@ -1,9 +1,4 @@
-# Logs (do not commit runtime logs)
+node_modules/
 *.log
-linux-scripts/logs/
-
-# Metrics / runtime data
-*.json
-
-# OS files
-.DS_Store
+linux-scripts/*.log
+prometheus.yml
