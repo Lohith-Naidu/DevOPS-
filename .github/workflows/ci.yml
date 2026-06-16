@@ -1,4 +1,4 @@
-name: System Health CI Pipeline
+name: CI Pipeline (Docker Build)
 
 on:
   push:
@@ -7,22 +7,21 @@ on:
     branches: [main]
 
 jobs:
-  system-health-check:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout repository (VERY IMPORTANT)
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      # 2. Show repo structure (debug step)
-      - name: List files
-        run: ls -R
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v3
 
-      # 3. Make script executable
-      - name: Make script executable
-        run: chmod +x linux-scripts/scripts/system-health.sh
+      - name: Build Docker Image
+        run: docker build -t devops-app .
 
-      # 4. Run system health script
-      - name: Run system health script
-        run: bash linux-scripts/scripts/system-health.sh
+      - name: Run Docker Container (Test)
+        run: |
+          docker run -d -p 8080:8080 --name test-container devops-app
+          sleep 5
+          docker ps
