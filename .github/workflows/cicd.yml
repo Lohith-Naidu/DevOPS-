@@ -11,31 +11,26 @@ permissions:
 
 jobs:
   build:
-    name: Build and Push Docker Image
     runs-on: self-hosted
 
     env:
       IMAGE_NAME: ghcr.io/lohith-naidu/devops-website:latest
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Verify Docker
-        shell: powershell
-        run: docker version
-
-      - name: Login to GitHub Container Registry
+      - name: Login to GHCR
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build Docker Image
+      - name: Build Docker image
         shell: powershell
         run: docker build -t $env:IMAGE_NAME .
 
-      - name: Push Docker Image
+      - name: Push Docker image
         shell: powershell
         run: docker push $env:IMAGE_NAME
