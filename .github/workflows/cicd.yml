@@ -5,32 +5,37 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   build:
+    name: Build and Push Docker Image
     runs-on: self-hosted
-
-    permissions:
-      contents: read
-      packages: write
 
     env:
       IMAGE_NAME: ghcr.io/lohith-naidu/devops-website:latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-      - name: Login to GHCR
+      - name: Verify Docker
+        shell: powershell
+        run: docker version
+
+      - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build Docker image
+      - name: Build Docker Image
         shell: powershell
-        run: docker build -t "${env:IMAGE_NAME}" .
+        run: docker build -t $env:IMAGE_NAME .
 
-      - name: Push image to GHCR
+      - name: Push Docker Image
         shell: powershell
-        run: docker push "${env:IMAGE_NAME}"
+        run: docker push $env:IMAGE_NAME
