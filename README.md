@@ -44,7 +44,7 @@ This project is designed as a **portfolio showcase project** demonstrating autom
 
 ## 💻 GitHub Repository
 
-🔗 https://github.com/your-username/your-repo
+🔗 https://github.com/Lohith-Naidu/DevOPS-
 
 ---
 
