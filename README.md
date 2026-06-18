@@ -38,7 +38,7 @@ This project is designed as a **portfolio showcase project** demonstrating autom
 
 ## 🌐 Live Portfolio
 
-🔗 https://your-portfolio.netlify.app
+🔗 https://6a300e6ad305d10008682dcd--grand-syrniki-ea801e.netlify.app/
 
 ---
 
